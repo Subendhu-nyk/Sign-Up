@@ -64,6 +64,12 @@
             try{
                 const response= await axios.post('http://localhost:3000/user',obj)
                 console.log(response.data.newUserdata)
+                if(response.status===201){
+                  window.location.href='/'  
+                }
+                else{
+                    throw new Error('failed to login')
+                }
             }
             catch (err){
                 console.log(err)

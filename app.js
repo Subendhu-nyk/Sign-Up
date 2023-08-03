@@ -6,7 +6,6 @@ const sequelize=require('./util/signup')
 const Sequelize = require('./models/signup')
 server.use(express.json());
 const cors=require('cors');
-const signup = require('./models/signup');
 server.use(cors())
 server.use(express.static(path.join(__dirname,'public')))
 server.use(bodyParser.urlencoded({extended:false}))
@@ -21,11 +20,11 @@ server.post('/user', async (req, res) => {
       const phone = req.body.phone;
       const password=req.body.password
       
-      // if(email===newUserdata.email){
-      //   console.log("user already present")
-      // }else{
+      if(email==undefined ||email.length===0|| name.length===0|| name==undefined || phone==undefined ||phone.length==0 || password==undefined || password.length===0){
+        return res.status(400).json({message:"Bad parameter or something is missing"})
+      }
 
-      const data = await signup.create({
+      const data = await Sequelize.create({
         name: name,
         email:email,
         phone:phone,
@@ -41,7 +40,7 @@ server.post('/user', async (req, res) => {
   });
 
 
-Sequelize.sync().then((result)=>{
+sequelize.sync().then((result)=>{
     console.log(result)
 })
 
