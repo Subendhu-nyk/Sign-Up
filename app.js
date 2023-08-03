@@ -19,17 +19,18 @@ server.post('/user', async (req, res) => {
       const email = req.body.email;
       const phone = req.body.phone;
       const password=req.body.password
-  
+   
       const data = await signup.create({
-        item: name,
+        name: name,
         email:email,
         phone:phone,
         password: password,
        
-      });        
+      }); 
+          
       res.status(201).json({ newUserdata: data });
     } catch (err) {       
-    res.status(500).json({ error: err }) 
+    res.status(500).json({ error:"some error", err }) 
     }
   });
 
