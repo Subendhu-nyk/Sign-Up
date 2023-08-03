@@ -9,7 +9,7 @@ body {
     justify-content: center;
   }
 
-  .row{
+  .row1{
     height: 710px;
   }
   
@@ -21,6 +21,10 @@ body {
     backdrop-filter: blur(10px);
     border: 2px solid #adb5bd;
     border-radius: 16px;    
+  }
+
+  a{
+    text-decoration: none;
   }
   
   .input {
