@@ -8,6 +8,7 @@ server.use(express.json());
 const cors=require('cors');
 const signup = require('./models/signup');
 server.use(cors())
+server.use(express.static(path.join(__dirname,'public')))
 server.use(bodyParser.urlencoded({extended:false}))
 
 server.get('/',(req,res)=>{
@@ -19,7 +20,11 @@ server.post('/user', async (req, res) => {
       const email = req.body.email;
       const phone = req.body.phone;
       const password=req.body.password
-   
+      
+      // if(email===newUserdata.email){
+      //   console.log("user already present")
+      // }else{
+
       const data = await signup.create({
         name: name,
         email:email,
@@ -29,6 +34,7 @@ server.post('/user', async (req, res) => {
       }); 
           
       res.status(201).json({ newUserdata: data });
+
     } catch (err) {       
     res.status(500).json({ error:"some error", err }) 
     }
